@@ -1,14 +1,17 @@
 'use client'
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Card, CardBody, CardFooter, Image, Chip, Button } from "@nextui-org/react";
-import { motion } from "framer-motion";
+import { motion, useAnimation, useMotionValue } from "framer-motion";
 import { FiExternalLink, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState("all");
   const [animationDirection, setAnimationDirection] = useState(1);
+  const [isPaused, setIsPaused] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const controls = useAnimation();
+  const x = useMotionValue(0);
 
   const projects = [
     {
@@ -88,10 +91,67 @@ export default function Portfolio() {
 
   const handleFilterChange = (filterId: string) => {
     setActiveFilter(filterId);
+    // Filter değiştiğinde animasyonu durdur ve pozisyonu sıfırla
+    controls.stop();
+    x.set(0);
+    setIsPaused(false);
   };
 
   // Her kartın genişliği (gap dahil)
   const cardWidth = 320; // 300px card + 20px gap (gap-4 = 16px, ama güvenli olması için 320)
+
+  // Animasyonu başlat
+  useEffect(() => {
+    if (duplicatedProjects.length > 0 && filteredProjects.length > 0 && !isPaused) {
+      const loopDistance = filteredProjects.length * cardWidth;
+      const loopDuration = filteredProjects.length * 2;
+      
+      // Mevcut pozisyonu al
+      const currentX = x.get();
+      
+      // Pozisyonu normalize et (loop aralığına) - her zaman 0 ile -loopDistance arasında
+      let normalizedX = currentX % loopDistance;
+      if (normalizedX > 0) {
+        normalizedX = normalizedX - loopDistance;
+      }
+      if (normalizedX < -loopDistance) {
+        normalizedX = normalizedX + loopDistance;
+      }
+      
+      // Önemli: Animasyonu her zaman aynı hızda başlatmak için
+      // Animasyonu her zaman tam loop mesafesi (normalizedX'ten normalizedX - loopDistance'e) için başlatıyoruz
+      // Bu şekilde animasyon her zaman aynı mesafeyi aynı sürede katedecek
+      
+      // Pozisyonu ayarla
+      x.set(normalizedX);
+      
+      // Animasyonu başlat - her zaman tam loop mesafesi için tam süre
+      // normalizedX'ten normalizedX - loopDistance'e gidecek (tam loop mesafesi)
+      // Bu şekilde animasyon her zaman aynı hızda olacak
+      controls.start({
+        x: normalizedX - loopDistance,
+        transition: {
+          x: {
+            repeat: Infinity,
+            repeatType: "loop",
+            duration: loopDuration,
+            ease: "linear",
+          },
+        },
+      });
+    }
+  }, [activeFilter, filteredProjects.length, duplicatedProjects.length, isPaused, controls, cardWidth, x]);
+
+  // Mouse hover kontrolü
+  const handleMouseEnter = () => {
+    setIsPaused(true);
+    controls.stop();
+  };
+
+  const handleMouseLeave = () => {
+    setIsPaused(false);
+    // useEffect otomatik olarak animasyonu devam ettirecek
+  };
 
   return (
     <section id="portfolio" className="py-20 bg-slate-50 dark:bg-slate-900/50">
@@ -142,22 +202,18 @@ export default function Portfolio() {
           </Button>
 
           {/* Sürekli Kaydıran Slider */}
-          <div className="overflow-hidden w-full py-4" ref={sliderRef}>
+          <div 
+            className="overflow-hidden w-full py-4" 
+            ref={sliderRef}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
             {duplicatedProjects.length > 0 && (
               <motion.div
                 className="flex gap-4"
-                animate={{
-                  x: `-${filteredProjects.length * cardWidth}px`,
-                }}
-                transition={{
-                  x: {
-                    repeat: Infinity,
-                    repeatType: "loop",
-                    duration: filteredProjects.length * 2,
-                    ease: "linear",
-                  },
-                }}
+                animate={controls}
                 style={{
+                  x,
                   width: `${duplicatedProjects.length * cardWidth}px`,
                 }}
               >
@@ -168,7 +224,6 @@ export default function Portfolio() {
                   >
                     <Card
                       className="w-full h-[450px] hover:scale-105 transition-transform duration-300 bg-white dark:bg-slate-800 flex flex-col cursor-pointer"
-                      isPressable
                     >
                       <CardBody className="p-0 flex flex-col h-full">
                         <div className="relative w-full h-64 flex-shrink-0 overflow-hidden">
