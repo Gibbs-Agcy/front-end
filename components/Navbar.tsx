@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react';
+import Image from 'next/image';
 import {
   Navbar as NextUINavbar,
   NavbarBrand,
@@ -58,8 +59,20 @@ export default function Navbar() {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <Link href="#hero" className="font-bold text-xl text-primary">
-            AJANS<span className="text-secondary">.</span>
+          <Link href="#hero" className="flex items-center gap-2">
+            <Image 
+              src={theme === "dark" ? "/gibbsbg.png" : "/gibbsbl.png"} 
+              alt="Gibbs Logo" 
+              width={40} 
+              height={40}
+              className="object-contain"
+            />
+            <span 
+              className="font-bold text-xl"
+              style={{ color: theme === "dark" ? "#f1f1f1" : "#353535" }}
+            >
+              Gibbs<span className="text-secondary">.</span>
+            </span>
           </Link>
         </NavbarBrand>
       </NavbarContent>
