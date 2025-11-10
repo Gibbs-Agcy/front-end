@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "bun --bun next dev -p 3001 --no-turbo",
+    "dev": "bun --bun next dev -p 3001",
     "build": "bun --bun next build",
     "start": "bun --bun next start -p 3001",
     "lint": "bun --bun next lint",
@@ -24,11 +24,12 @@
     "next": "^16.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-intersection-observer": "^9.8.1",
+    "react-intersection-observer": "^10.0.0",
     "tailwind-merge": "^3.4.0",
     "typescript": "^5.3.3"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.17",
     "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^24.10.0",
     "@types/react": "^19",

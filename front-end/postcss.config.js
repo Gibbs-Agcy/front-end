@@ -1,7 +1,7 @@
 module.exports = {
   plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
+    // Use Next.js 16-compatible Tailwind PostCSS integration
+    '@tailwindcss/postcss': {},
   },
 }
 
