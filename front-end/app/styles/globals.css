@@ -51,7 +51,7 @@
 
   ::-webkit-scrollbar-thumb {
     background-color: hsl(var(--primary) / 0.5);
-    @apply rounded-full;
+    border-radius: 9999px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -82,7 +82,12 @@
 
   .glass {
     background-color: hsl(var(--background) / 0.8);
-    @apply backdrop-blur-xl border;
+    /* Replace @apply backdrop-blur-xl with explicit CSS to avoid unknown utility errors */
+    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(24px);
+    /* Replace @apply border with explicit border declarations */
+    border-width: 1px;
+    border-style: solid;
     border-color: hsl(var(--border) / 0.5);
   }
 
