@@ -5,11 +5,14 @@
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
+// Register ScrollTrigger plugin to enable scrollTrigger in GSAP tweens
+gsap.registerPlugin(ScrollTrigger)
+
 /**
  * Create a fade-in animation with ScrollTrigger
  */
 export function fadeInOnScroll(
-  element: gsap.TweenTarget,
+  element: gsap.DOMTarget,
   options?: gsap.TweenVars
 ) {
   return gsap.fromTo(
@@ -34,7 +37,7 @@ export function fadeInOnScroll(
  * Create a stagger animation for multiple elements
  */
 export function staggerFadeIn(
-  elements: gsap.TweenTarget,
+  elements: gsap.DOMTarget,
   staggerAmount: number = 0.1
 ) {
   return gsap.fromTo(
@@ -58,7 +61,7 @@ export function staggerFadeIn(
 /**
  * Parallax effect
  */
-export function parallax(element: gsap.TweenTarget, speed: number = 0.5) {
+export function parallax(element: gsap.DOMTarget, speed: number = 0.5) {
   return gsap.to(element, {
     yPercent: -50 * speed,
     ease: 'none',

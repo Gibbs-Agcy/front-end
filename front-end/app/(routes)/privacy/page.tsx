@@ -1,3 +1,5 @@
+'use client'
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/app/components/ui/card'
 import { ScrollReveal } from '@/app/components/animations/scroll-reveal'
 

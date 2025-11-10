@@ -20,7 +20,7 @@ export function useLenis() {
       gestureOrientation: 'vertical',
       smoothWheel: true,
       wheelMultiplier: 1,
-      smoothTouch: false, // Mobile'da daha iyi performans
+      syncTouch: false, // Mobile'da daha iyi performans
       touchMultiplier: 2,
       infinite: false,
     })
