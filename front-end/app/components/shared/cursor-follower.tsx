@@ -13,7 +13,7 @@ export function CursorFollower() {
   const isDesktop = useMediaQuery('(min-width: 1024px)')
   const [isHovering, setIsHovering] = useState(false)
   const [isClicking, setIsClicking] = useState(false)
-  const rafRef = useRef<number>()
+  const rafRef = useRef<number | null>(null)
 
   // Optimized mouse tracking with requestAnimationFrame
   useEffect(() => {
