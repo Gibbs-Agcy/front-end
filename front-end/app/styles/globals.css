@@ -26,7 +26,8 @@
   }
 
   * {
-    @apply border-border;
+    /* Use explicit CSS for border color to avoid @apply unknown utility errors in Tailwind v4 */
+    border-color: hsl(var(--border));
   }
 
   body {
@@ -77,7 +78,9 @@
   }
 
   .glass {
-    @apply bg-background/80 backdrop-blur-xl border border-border/50;
+    /* Compose utilities with explicit border color instead of @apply on color utility */
+    @apply bg-background/80 backdrop-blur-xl border;
+    border-color: hsl(var(--border) / 0.5);
   }
 
   .glow {
