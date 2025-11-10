@@ -187,8 +187,10 @@ export function Contact() {
         if (!prefersReducedMotion) {
           formRef.current.classList.add('form-error')
           gsap.to(formRef.current, {
-            x: [-10, 10, -10, 10, 0],
-            duration: 0.4,
+            x: -10,
+            duration: 0.05,
+            repeat: 4,
+            yoyo: true,
             onComplete: () => {
               formRef.current?.classList.remove('form-error')
             },
