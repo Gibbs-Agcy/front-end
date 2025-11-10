@@ -3,14 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "workspaces": [
-    "front-end/*",
-    "back-end/*"
+    "front-end",
+    "back-end/app"
   ],
   "scripts": {
-    "dev": "npm run dev --workspaces --if-present",
-    "build": "npm run build --workspaces --if-present",
-    "lint": "npm run lint --workspaces --if-present",
-    "test": "npm run test --workspaces --if-present",
-    "install:all": "npm install --workspaces --include-workspace-root=false"
+    "dev": "bun run --filter '*' dev",
+    "build": "bun run --filter '*' build",
+    "lint": "bun run --filter '*' lint",
+    "test": "bun run --filter '*' test",
+    "install:all": "bun install"
   }
 }
