@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
 
   // Compiler optimizations
   compiler: {
@@ -91,7 +90,10 @@ const nextConfig = {
 
   // Turbopack configuration (empty to silence the warning)
   // Webpack is still used for production builds
-  turbopack: {},
+  turbopack: {
+    // Explicitly set root to avoid lockfile-based inference warnings
+    root: __dirname,
+  },
 }
 
 module.exports = nextConfig
