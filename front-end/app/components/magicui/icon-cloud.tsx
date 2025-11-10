@@ -10,7 +10,7 @@ interface IconCloudProps {
 
 export function IconCloud({ icons, className }: IconCloudProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | null>(null)
 
   useEffect(() => {
     if (!containerRef.current) return
