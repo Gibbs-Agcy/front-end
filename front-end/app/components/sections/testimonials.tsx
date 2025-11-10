@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect, useRef, memo } from 'react'
+import Image from 'next/image'
 import { gsap } from '@/lib/gsap-config'
 import { Marquee } from '../magicui/marquee'
 import { TweetCard } from '../magicui/tweet-card'
 import { ScrollReveal } from '../animations/scroll-reveal'
 import { Star, Quote, Sparkles, CheckCircle2 } from 'lucide-react'
-import { cn } from '@/lib/utils'
+// Removed unused import
 import { useMediaQuery } from '@/app/hooks/use-media-query'
 
 interface Testimonial {
@@ -39,7 +40,7 @@ const testimonials: Testimonial[] = [
     role: 'Cafe Sahibi',
     company: 'Aroma Coffee',
     content:
-      'Sosyal medya yönetimi için Gibbs\'i seçtik ve çok memnunuz. Takipçi sayımız 3 ayda 10 kata çıktı. İçerik kalitesi gerçekten profesyonel.',
+      'Sosyal medya yönetimi için Gibbs’i seçtik ve çok memnunuz. Takipçi sayımız 3 ayda 10 kata çıktı. İçerik kalitesi gerçekten profesyonel.',
     rating: 5,
     date: '1 ay önce',
   },
@@ -81,7 +82,7 @@ const testimonials: Testimonial[] = [
     role: 'Pazarlama Direktörü',
     company: 'Growth Marketing',
     content:
-      'SEO çalışmaları için Gibbs\'le anlaştık. 6 ayda Google\'da ilk sayfaya çıktık. Organik trafiğimiz inanılmaz arttı. Teşekkürler!',
+      'SEO çalışmaları için Gibbs’le anlaştık. 6 ayda Google’da ilk sayfaya çıktık. Organik trafiğimiz inanılmaz arttı. Teşekkürler!',
     rating: 5,
     date: '5 hafta önce',
   },
@@ -143,20 +144,17 @@ const testimonials: Testimonial[] = [
     role: 'Content Creator',
     company: 'Personal Brand',
     content:
-      'Kişisel web sitem ve portfolio için Gibbs\'i seçtim. Sonuç beklentilerimin çok üstünde. Tasarım şık, hızlı ve etkileyici.',
+      'Kişisel web sitem ve portfolio için Gibbs’i seçtim. Sonuç beklentilerimin çok üstünde. Tasarım şık, hızlı ve etkileyici.',
     rating: 5,
     date: '3 hafta önce',
   },
 ]
 
-// Split testimonials into two rows
-const firstRow = testimonials.slice(0, Math.ceil(testimonials.length / 2))
-const secondRow = testimonials.slice(Math.ceil(testimonials.length / 2))
 
 /**
  * Testimonials section with Marquee carousel
  */
-export function Testimonials() {
+export function Testimonials({ testimonials: testimonialsProp }: { testimonials?: Testimonial[] }) {
   const sectionRef = useRef<HTMLDivElement>(null)
   const titleRef = useRef<HTMLDivElement>(null)
   const isMobile = useMediaQuery('(max-width: 768px)')
@@ -184,6 +182,12 @@ export function Testimonials() {
       },
     })
   }, [])
+
+  const data = testimonialsProp && testimonialsProp.length ? testimonialsProp : testimonials
+
+  // Split testimonials into two rows from provided data
+  const firstRow = data.slice(0, Math.ceil(data.length / 2))
+  const secondRow = data.slice(Math.ceil(data.length / 2))
 
   return (
     <section
@@ -249,16 +253,15 @@ export function Testimonials() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
             {[
-              { value: '150+', label: 'Mutlu Müşteri', icon: '😊' },
-              { value: '4.9/5', label: 'Ortalama Puan', icon: '⭐' },
-              { value: '%98', label: 'Memnuniyet Oranı', icon: '✨' },
-              { value: '300+', label: 'Tamamlanan Proje', icon: '🚀' },
+              { value: '150+', label: 'Mutlu Müşteri' },
+              { value: '4.9/5', label: 'Ortalama Puan' },
+              { value: '%98', label: 'Memnuniyet Oranı' },
+              { value: '300+', label: 'Tamamlanan Proje' },
             ].map((stat, i) => (
               <div
                 key={i}
-                className="text-center space-y-2 p-6 glass rounded-xl hover:scale-105 transition-transform will-change-transform"
+                className="flex flex-col items-center text-center space-y-3 p-6 glass rounded-xl hover:scale-105 transition-transform will-change-transform"
               >
-                <div className="text-4xl mb-2">{stat.icon}</div>
                 <div className="text-3xl md:text-4xl font-bold text-gradient">
                   {stat.value}
                 </div>
@@ -309,9 +312,12 @@ const TestimonialCard = memo(function TestimonialCard({
           {/* Avatar */}
           <div className="shrink-0">
             {testimonial.avatar ? (
-              <img
+              <Image
                 src={testimonial.avatar}
                 alt={testimonial.name}
+                width={48}
+                height={48}
+                unoptimized
                 className="h-12 w-12 rounded-full object-cover"
               />
             ) : (

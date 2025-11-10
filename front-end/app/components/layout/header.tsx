@@ -109,11 +109,11 @@ export function Header() {
               isScrolled
                 ? 'bg-background/80 backdrop-blur-2xl border border-border/50 shadow-2xl shadow-primary/5'
                 : 'bg-background/60 backdrop-blur-xl border border-border/30',
-              'rounded-full px-10 py-4'
+              'overflow-hidden rounded-full px-6 py-3'
             )}
             aria-label="Main navigation"
           >
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-6">
               {/* Logo */}
               <button
                 onClick={() => {
@@ -125,7 +125,7 @@ export function Header() {
                     behavior: prefersReducedMotion ? 'auto' : 'smooth',
                   })
                 }}
-                className="flex items-center gap-3.5 group pr-8 border-r border-border/50"
+                className="flex items-center gap-3.5 group pr-6 border-r border-border/50"
                 aria-label="Go to homepage"
               >
                 <div className="relative">
@@ -143,7 +143,7 @@ export function Header() {
               </button>
 
               {/* Nav Links */}
-              <div className="flex items-center gap-2 px-4 flex-1">
+              <div className="flex items-center gap-3 px-2 flex-1">
                 {navLinks.map((link) => (
                   <button
                     key={link.href}
@@ -189,7 +189,7 @@ export function Header() {
               {/* CTA */}
               <button
                 onClick={() => scrollToSection('#contact')}
-                className="ml-4 pl-8 border-l border-border/50 group"
+                className="ml-3 pl-6 border-l border-border/50 group"
                 aria-label="Get in touch"
               >
                 <span className="relative inline-flex items-center gap-2 px-7 py-3 bg-gradient-to-r from-primary to-secondary text-white text-sm font-semibold rounded-full overflow-hidden transition-all hover:scale-105 hover:shadow-lg hover:shadow-primary/50">

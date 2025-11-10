@@ -41,16 +41,16 @@ const faqs: FAQ[] = [
   },
   {
     id: 'g3',
-    question: "Sadece Türkiye'de mi hizmet veriyorsunuz?",
+    question: 'Sadece Türkiye’de mi hizmet veriyorsunuz?',
     answer:
-      "Hayır, global olarak çalışıyoruz. Türkiye, Avrupa ve Amerika'dan müşterilerimiz var. Remote çalışma altyapımız sayesinde dünyanın her yerinden projeler alıyoruz.",
+      'Hayır, global olarak çalışıyoruz. Türkiye, Avrupa ve Amerika’dan müşterilerimiz var. Remote çalışma altyapımız sayesinde dünyanın her yerinden projeler alıyoruz.',
     category: 'general',
   },
   {
     id: 'g4',
     question: 'Küçük işletmeler için de çalışır mısınız?',
     answer:
-      "Kesinlikle! Startup'lardan kurumsal firmalara kadar her ölçekte projeye açığız. Bütçenize uygun esnek çözümler sunuyoruz.",
+      'Kesinlikle! Startup’lardan kurumsal firmalara kadar her ölçekte projeye açığız. Bütçenize uygun esnek çözümler sunuyoruz.',
     category: 'general',
   },
   {
@@ -129,7 +129,7 @@ const faqs: FAQ[] = [
     id: 'pr4',
     question: 'Proje ilerlemesini nasıl takip ederiz?',
     answer:
-      "Haftalık sprint meeting'ler, online proje yönetim araçları (Jira/Asana) ve düzenli progress report'lar ile şeffaf takip sağlıyoruz.",
+      'Haftalık sprint meeting’ler, online proje yönetim araçları (Jira/Asana) ve düzenli progress report’lar ile şeffaf takip sağlıyoruz.',
     category: 'process',
   },
   {
@@ -481,13 +481,13 @@ function FAQItem({
       {/* Question */}
       <button
         onClick={onToggle}
-        className="w-full p-4 md:p-6 flex items-start gap-4 text-left hover:bg-primary/5 transition-colors group"
+        className="w-full p-4 md:p-6 flex items-center gap-3 text-left hover:bg-primary/5 transition-colors group"
         aria-expanded={isOpen}
         aria-controls={`faq-answer-${faq.id}`}
         id={`faq-question-${faq.id}`}
       >
         <div className="flex-1">
-          <h3 className="text-base md:text-lg font-semibold group-hover:text-primary transition-colors">
+          <h3 className="text-base md:text-lg font-semibold leading-tight group-hover:text-primary transition-colors">
             {faq.question}
           </h3>
         </div>

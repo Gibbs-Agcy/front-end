@@ -212,7 +212,7 @@ export function Contact() {
         setFormData(initialFormData)
         setIsSuccess(false)
       }, 3000)
-    } catch (error) {
+    } catch {
       setErrors({ submit: 'Bir hata oluştu. Lütfen tekrar deneyin.' })
     } finally {
       setIsSubmitting(false)
@@ -342,9 +342,9 @@ export function Contact() {
         </ScrollReveal>
 
         {/* Main Content Grid */}
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-2 gap-8 md:gap-10 items-start max-w-6xl mx-auto">
           {/* Left - Contact Info */}
-          <ScrollReveal delay={0.2} className="space-y-8">
+          <ScrollReveal delay={0.2} className="space-y-6">
             {/* Contact Cards */}
             <div className="space-y-4">
               {contactInfo.map((item, i) => {
@@ -679,7 +679,7 @@ export function Contact() {
                     >
                       KVKK Aydınlatma Metni
                     </a>
-                    'ni okudum, kişisel verilerimin işlenmesini kabul ediyorum.{' '}
+                    ’ni okudum, kişisel verilerimin işlenmesini kabul ediyorum.{' '}
                     <span aria-label="required field" className="text-red-500">
                       *
                     </span>
