@@ -84,16 +84,10 @@ const nextConfig = {
   },
 
   // Experimental features
-  experimental: {
-    optimizePackageImports: ['lucide-react'],
-  },
+  experimental: {},
 
-  // Turbopack configuration (empty to silence the warning)
-  // Webpack is still used for production builds
-  turbopack: {
-    // Explicitly set root to avoid lockfile-based inference warnings
-    root: __dirname,
-  },
+  // Turbopack configuration
+  turbopack: {},
 }
 
 module.exports = nextConfig
