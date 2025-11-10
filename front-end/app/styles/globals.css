@@ -31,7 +31,8 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
@@ -45,20 +46,22 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-muted;
+    background-color: hsl(var(--muted));
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-primary/50 rounded-full;
+    background-color: hsl(var(--primary) / 0.5);
+    @apply rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary;
+    background-color: hsl(var(--primary));
   }
 
   /* Selection */
   ::selection {
-    @apply bg-primary/20 text-foreground;
+    background-color: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
   }
 }
 
@@ -78,8 +81,8 @@
   }
 
   .glass {
-    /* Compose utilities with explicit border color instead of @apply on color utility */
-    @apply bg-background/80 backdrop-blur-xl border;
+    background-color: hsl(var(--background) / 0.8);
+    @apply backdrop-blur-xl border;
     border-color: hsl(var(--border) / 0.5);
   }
 
